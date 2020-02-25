@@ -80,3 +80,11 @@ ion-content ion-toolbar {
 
     
   }
+
+  .data{
+    display: flex;
+    justify-content: space-between;
+  }
+  .canvas{
+    height: 10rem;
+  }

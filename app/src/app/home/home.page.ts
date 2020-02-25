@@ -7,10 +7,16 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
+  public type: string;
+
   constructor() { }
 
-  openModal(tipo: string) {
+  openModal() {
 
+
+  }
+  setType(type: string) {
+    this.type = type;
 
   }
 
