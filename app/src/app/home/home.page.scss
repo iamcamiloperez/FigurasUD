@@ -38,6 +38,15 @@ ion-content ion-toolbar {
   background: var(--ion-color-primary);
 }
 
+.help{
+  display: flex;
+  justify-content: space-between;
+  ion-icon{
+    font-size: 6rem;
+    width: 6rem;
+  }
+}
+
   .figuras{
     display: flex;
     justify-content: space-between;
