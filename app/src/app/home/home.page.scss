@@ -1,0 +1,82 @@
+#container {
+  text-align: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #8c8c8c;
+
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}
+
+ion-content ion-toolbar {
+  --background: translucent;
+}
+
+#background-content{
+  background: #f2ecd9;
+}
+
+.toolbar-background{
+  background: var(--ion-color-primary);
+}
+
+  .figuras{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+
+    .figura{
+
+      height: 2rem;
+
+      &.circulo{
+        background: var(--ion-color-medium);
+  
+        &.active{
+          background: var(--ion-color-tertiary);
+        }
+      }
+  
+      &.cuadrado{
+        background: var(--ion-color-medium);
+        &.active{
+          background: var(--ion-color-tertiary);
+        }
+      }
+  
+      &.triangulo{
+        background: var(--ion-color-medium);
+        &.active{
+          background: var(--ion-color-tertiary);
+        }
+      }
+  
+      &.rectangulo{
+        background: var(--ion-color-medium);
+        &.active{
+          background: var(--ion-color-tertiary);
+        }
+      }
+       
+    }
+
+    
+  }
