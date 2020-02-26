@@ -30,20 +30,20 @@
     <ion-card>
       <ion-card-content class="figuras">
 
-        <div (click)="setType('CIR')">
-          <div class="figura circulo"></div>
+        <div (click)="setType('circle')">
+          <svg #circulo class="figura circulo"></svg>
           <h6>Circulo</h6>
         </div>
-        <div (click)="setType('CUA')">
-          <div class="figura cuadrado"></div>
+        <div (click)="setType('square')">
+          <svg #cuadrado class="figura cuadrado"></svg>
           <h6>Cuadrado</h6>
         </div>
-        <div (click)="setType('TRI')">
-          <div class="figura triangulo"></div>
+        <div (click)="setType('polygon')">
+          <svg #triangulo class="figura triangulo"></svg>
           <h6>Triangulo</h6>
         </div>
-        <div (click)="setType('REC')">
-          <div class="figura rectangulo"></div>
+        <div (click)="setType('rect')">
+          <svg #rectangulo class="figura rectangulo"></svg>
           <h6>Rectangulo</h6>
         </div>
       </ion-card-content>
@@ -53,12 +53,14 @@
       Dibujar
     </ion-button>
 
-    <div class="data">
-      <h5>Área: {{area}}</h5>
-      <h5>Perimetro: {{perimetro}}</h5>
-    </div>
-    <ion-card class="canvas">
-      <ion-card-content></ion-card-content>
+    <ion-card class="card-canvas">
+      <ion-card-content>
+        <div class="data">
+          <span>Área: {{area}}</span>
+          <span>Perimetro: {{perimetro}}</span>
+        </div>
+        <svg #canvas class="canvas"></svg>
+      </ion-card-content>
     </ion-card>
 
   </div>

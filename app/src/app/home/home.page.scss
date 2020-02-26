@@ -1,33 +1,5 @@
 #container {
-  text-align: center;
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
-}
-
-ion-content ion-toolbar {
-  --background: translucent;
 }
 
 #background-content{
@@ -51,49 +23,34 @@ ion-content ion-toolbar {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-
     .figura{
 
-      height: 2rem;
+      margin: 1px;
+      width: 100%;
+      height: 3rem;
+      // background: var(--ion-color-medium);
+      &.active{
+        background: var(--ion-color-tertiary);
+      }
+    }
 
-      &.circulo{
-        background: var(--ion-color-medium);
-  
-        &.active{
-          background: var(--ion-color-tertiary);
-        }
-      }
-  
-      &.cuadrado{
-        background: var(--ion-color-medium);
-        &.active{
-          background: var(--ion-color-tertiary);
-        }
-      }
-  
-      &.triangulo{
-        background: var(--ion-color-medium);
-        &.active{
-          background: var(--ion-color-tertiary);
-        }
-      }
-  
-      &.rectangulo{
-        background: var(--ion-color-medium);
-        &.active{
-          background: var(--ion-color-tertiary);
-        }
-      }
-       
+    h6{
+      text-align: center;
     }
 
     
   }
 
-  .data{
-    display: flex;
-    justify-content: space-between;
-  }
-  .canvas{
-    height: 10rem;
+  .card-canvas {
+    .data {
+      display: flex;
+      justify-content: space-between;
+    }
+    .canvas {
+      background: white;
+      width: 100%;
+      height: 20rem;
+      border-radius: 4px;
+      border: dashed 1px gray;
+    }
   }
