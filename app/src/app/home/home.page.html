@@ -1,0 +1,65 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>
+      Figuras UD
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar color="primary">
+      <ion-title size="large">Figuras UD</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container" padding>
+
+    <ion-card>
+
+      <ion-card-content class="help">
+        <ion-icon name="help-circle-outline"></ion-icon>
+        <p>Seleccione la figura que desea graficar y luego digita los datos solicitados para ver el resultado en
+          pantalla</p>
+
+      </ion-card-content>
+    </ion-card>
+
+    <h4>Figura</h4>
+
+    <ion-card>
+      <ion-card-content class="figuras">
+
+        <div (click)="setType('CIR')">
+          <div class="figura circulo"></div>
+          <h6>Circulo</h6>
+        </div>
+        <div (click)="setType('CUA')">
+          <div class="figura cuadrado"></div>
+          <h6>Cuadrado</h6>
+        </div>
+        <div (click)="setType('TRI')">
+          <div class="figura triangulo"></div>
+          <h6>Triangulo</h6>
+        </div>
+        <div (click)="setType('REC')">
+          <div class="figura rectangulo"></div>
+          <h6>Rectangulo</h6>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-button expand="block" color="primary" (click)="openModal()">
+      Dibujar
+    </ion-button>
+
+    <div class="data">
+      <h5>Área: {{area}}</h5>
+      <h5>Perimetro: {{perimetro}}</h5>
+    </div>
+    <ion-card class="canvas">
+      <ion-card-content></ion-card-content>
+    </ion-card>
+
+  </div>
+</ion-content>
