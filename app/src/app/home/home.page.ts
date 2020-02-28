@@ -1,5 +1,8 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Platform } from '@ionic/angular';
+import { FigureModel, CircleModel } from 'src/models/figura/figure.model';
+import { NgForm } from '@angular/forms';
+import { FigureInterface } from 'src/interfaces/figure.interface';
 
 @Component({
   selector: 'app-home',
@@ -9,10 +12,10 @@ import { Platform } from '@ionic/angular';
 export class HomePage {
 
   @ViewChild('canvas', { read: ElementRef, static: true }) private canvas: ElementRef;
-  @ViewChild('circulo', { read: ElementRef, static: true }) private circulo: ElementRef;
-  @ViewChild('cuadrado', { read: ElementRef, static: true }) private cuadrado: ElementRef;
-  @ViewChild('triangulo', { read: ElementRef, static: true }) private triangulo: ElementRef;
-  @ViewChild('rectangulo', { read: ElementRef, static: true }) private rectangulo: ElementRef;
+  @ViewChild('circle', { read: ElementRef, static: true }) private circle: ElementRef;
+  @ViewChild('square', { read: ElementRef, static: true }) private square: ElementRef;
+  @ViewChild('triangle', { read: ElementRef, static: true }) private triangle: ElementRef;
+  @ViewChild('rect', { read: ElementRef, static: true }) private rect: ElementRef;
 
   public type: string;
   private area: number;
@@ -26,38 +29,24 @@ export class HomePage {
 
   initComponents() {
 
-    let circleDim = this.getDimensions(this.circulo);
-    let cuadradoDim = this.getDimensions(this.cuadrado);
-    let trianguloDim = this.getDimensions(this.triangulo);
-    let rectanguloDim = this.getDimensions(this.rectangulo);
+    let circleDim = this.getDimensions(this.circle);
+    let squareDim = this.getDimensions(this.square);
+    let triangleDim = this.getDimensions(this.triangle);
+    let rectDim = this.getDimensions(this.rect);
 
-    let properties = {
-      cx: 'calc(50%)',
-      cy: 'calc(50%)',
-      r: 10,
-      fill: "red",
-      stroke: "blue",
-      'stroke-width': 2
-    };
+    let circleFigure = new CircleModel('calc(50%)', 'calc(50%)', circleDim.maxRadio);
 
-    this.draw('circle', properties, this.circulo);
+    this.draw(circleFigure, this.circle);
+    this.draw(circleFigure, this.square);
+    this.draw(circleFigure, this.triangle);
+    this.draw(circleFigure, this.rect);
   }
 
   openModal() {
 
     let circleDim = this.getDimensions(this.canvas, 20);
-
-    let objeto = {
-      cx: 'calc(50%)',
-      cy: 'calc(50%)',
-      r: circleDim.maxRadio,
-      fill: "red",
-      stroke: "blue",
-      'stroke-width': 2,
-      class: 'result'
-    };
-
-    this.draw('circle', objeto, this.canvas);
+    let figure = new CircleModel('calc(50%)', 'calc(50%)', circleDim.maxRadio);
+    this.draw(figure, this.canvas);
 
   }
 
@@ -87,21 +76,7 @@ export class HomePage {
   }
 
   /**
-   * Permite establecer las propiedades del elemento
-   * @param properties 
-   * @param element 
-   */
-  setProperties(properties: any, element) {
-    for (let property in properties) {
-      if (properties.hasOwnProperty(property)) {
-        element.setAttributeNS(null, property, properties[property]);
-      }
-    }
-    return element;
-  }
-
-  /**
-   * 
+   * Permite establecer el tipo de figura a dibujar
    * @param type 
    */
   setType(type: string) {
@@ -110,18 +85,56 @@ export class HomePage {
 
   /**
    * Permite dibujar una figura
-   * @param type 
-   * @param properties 
-   * @param element 
+   * @param figure 
+   * @param parent 
    */
-  draw(type: string, properties: any, element: ElementRef) {
-    console.log(type, properties);
-    const SVG_NS = "http://www.w3.org/2000/svg";
-    let figure = document.createElementNS(SVG_NS, type);
-    figure = this.setProperties(properties, figure);
-    element.nativeElement.innerHTML = '';
-    element.nativeElement.appendChild(figure);
+  draw(figure: FigureInterface, parent: ElementRef, clearParent = true) {
+    parent.nativeElement.innerHTML = '';
+    parent.nativeElement.appendChild(figure);
     return figure;
   }
+
+
+  /***********************************************/
+  title = 'FigurasUd';
+  figura: FigureModel = new FigureModel();
+  anchoFigura: string = "0px";
+  altoFigura: string = "0px";
+
+
+  llenarDatos(value: string) {
+    this.figura.limpiar();
+    this.figura.nombre = value;
+    this.anchoFigura = "0px";
+    this.altoFigura = "0px";
+  }
+
+  onSubmit(datos: NgForm) {
+    this.figura.altura = datos.value["altura"];
+    this.figura.base = datos.value["base"];
+    this.figura.calcular();
+    this.anchoFigura = this.figura.base + 'px';
+    this.altoFigura = this.figura.altura + 'px';
+
+    if (this.figura.base > 270) {
+      let b = this.figura.base;
+      let h = this.figura.altura;
+      h = (h * 270 / b);
+      b = 270;
+      if (this.figura.nombre == 'triángulo') {
+        h = h / 2;
+        b = b / 2;
+      }
+      this.altoFigura = h.toString() + 'px';
+      this.anchoFigura = b.toString() + 'px';
+      console.log(this.anchoFigura);
+      console.log(this.altoFigura);
+    }
+  }
+  /***********************************************/
+
+
+
+
 
 }

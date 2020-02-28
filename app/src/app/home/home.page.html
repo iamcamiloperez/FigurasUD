@@ -30,20 +30,20 @@
     <ion-card>
       <ion-card-content class="figuras">
 
-        <div (click)="setType('circle')">
-          <svg #circulo class="figura circulo"></svg>
+        <div (click)="setType(TYPE_CIRCLE)">
+          <svg #circle class="figura circulo"></svg>
           <h6>Circulo</h6>
         </div>
-        <div (click)="setType('square')">
-          <svg #cuadrado class="figura cuadrado"></svg>
+        <div (click)="setType(TYPE_SQUARE)">
+          <svg #square class="figura cuadrado"></svg>
           <h6>Cuadrado</h6>
         </div>
-        <div (click)="setType('polygon')">
-          <svg #triangulo class="figura triangulo"></svg>
+        <div (click)="setType(TYPE_TRIANGLE)">
+          <svg #triangle class="figura triangulo"></svg>
           <h6>Triangulo</h6>
         </div>
-        <div (click)="setType('rect')">
-          <svg #rectangulo class="figura rectangulo"></svg>
+        <div (click)="setType(TYPE_RECT)">
+          <svg #rect class="figura rectangulo"></svg>
           <h6>Rectangulo</h6>
         </div>
       </ion-card-content>
