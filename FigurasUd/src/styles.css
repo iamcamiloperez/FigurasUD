@@ -1,8 +1,80 @@
-.head{
+body{
+    background-color: rgb(224, 224, 224);
+}
+
+h3{
     background-color: rgb(41, 122, 189);
-    height: 10px;
+    padding: 5px;
+    color: white;
+}
+
+h4{
+    color: black;
+    margin: 5px 7%;
+}
+
+.alert-light{
+    margin: 15px 7%;
 }
 
 .figura{
-    background-color: rgb(41, 122, 189);  
+    background-color: rgb(41, 122, 189); 
+}
+
+.circulo{
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.triángulo{
+    width: 0;
+    height: 0;    
+    background-color: transparent;
+    margin: 0 auto;
+}
+
+.cuadrado{
+    margin: 0 auto;
+}
+
+.rectángulo{
+    margin: 0 auto;
+}
+
+a {
+    cursor: pointer;
+    height: 100%;    
+}
+
+a > div {
+    background-color: rgb(168, 208, 209);
+    width: 50px;
+    height: 50px;    
+}
+
+a > .triángulo{
+    width: 0px;
+    height: 0px;
+    border-right: 25px solid transparent;
+    border-top: 25px solid transparent; 
+    border-left: 25px solid rgb(168, 208, 209);
+    border-bottom: 25px solid rgb(168, 208, 209);
+}
+
+a > .rectángulo{    
+    width: 30px;    
+}
+
+.active{
+    background-color:rgb(57, 127, 160);    
+}
+
+.activeTriangulo{
+    border-left: 25px solid rgb(57, 127, 160) !important;
+    border-bottom: 25px solid rgb(57, 127, 160) !important;
+}
+
+.resultado{
+    min-height: 270px;
+    height: auto;
 }
