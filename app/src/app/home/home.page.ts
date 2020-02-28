@@ -1,7 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Platform } from '@ionic/angular';
-import { FigureModel, CircleModel } from 'src/models/figura/figure.model';
-import { NgForm } from '@angular/forms';
+import { CircleModel } from 'src/models/figura/figure.model';
 import { FigureInterface } from 'src/interfaces/figure.interface';
 
 @Component({
@@ -34,7 +33,7 @@ export class HomePage {
     let triangleDim = this.getDimensions(this.triangle);
     let rectDim = this.getDimensions(this.rect);
 
-    let circleFigure = new CircleModel('calc(50%)', 'calc(50%)', circleDim.maxRadio);
+    let circleFigure = new CircleModel('calc(50%)', 'calc(50%)', 20/*circleDim.maxRadio*/);
 
     this.draw(circleFigure, this.circle);
     this.draw(circleFigure, this.square);
@@ -89,13 +88,15 @@ export class HomePage {
    * @param parent 
    */
   draw(figure: FigureInterface, parent: ElementRef, clearParent = true) {
-    parent.nativeElement.innerHTML = '';
+    if (clearParent) {
+      parent.nativeElement.innerHTML = '';
+    }
     parent.nativeElement.appendChild(figure);
     return figure;
   }
 
 
-  /***********************************************/
+  /***********************************************
   title = 'FigurasUd';
   figura: FigureModel = new FigureModel();
   anchoFigura: string = "0px";

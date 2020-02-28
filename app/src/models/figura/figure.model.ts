@@ -60,7 +60,7 @@ export class CircleModel implements FigureInterface {
    * Permite obtener el área
    */
   getArea() {
-    Math.PI * Math.pow(this.radio, 2)
+    return Math.PI * Math.pow(this.radio, 2)
   }
 
   /**

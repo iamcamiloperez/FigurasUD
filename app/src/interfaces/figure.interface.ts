@@ -7,8 +7,8 @@ export interface FigureInterface {
     fill?: string;
     stroke?: string;
     strokeWidth?: number;
-    getArea();
-    getPerimeter();
+    getArea(): number;
+    getPerimeter(): number;
     getProperties();
     getSvgElement();
 }
