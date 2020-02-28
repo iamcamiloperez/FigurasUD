@@ -16,6 +16,7 @@ export class FiguraModule {
   base:number;
   altura:number;
   diametro:number;
+  hipotenusa:number;
   area:number;
   
   
@@ -33,12 +34,13 @@ export class FiguraModule {
         this.diametro = this.base * 4;
         break;
       case 'triángulo':
-        this.altura = this.base;
         this.area = (this.base  * this.altura) / 2 ;
-        this.diametro = this.base * 3;
+        this.hipotenusa = Math.hypot(this.base,this.altura);
+        this.diametro = this.base + this.altura + this.hipotenusa;        
         break;
       case 'circulo':
-        this.area = Math.pow(this.base  * 3.14159265359 , 2);
+        this.altura = this.base;
+        this.area = Math.PI * Math.pow(this.base,2);
         this.diametro = this.base * 2;
         break;
       case 'rectángulo':

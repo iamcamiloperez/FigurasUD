@@ -1,30 +1,38 @@
 <!-- Toolbar -->
-<h3>Figuras</h3>
+<h3>Figuras UD</h3>
 
-<div class="container">
-  <div class="row">
-    <div class="col-3">
-      <button class="btn btn-outline-primary"
-              data-toggle="modal" data-target="#formModal" 
-              (click)="llenarDatos('cuadrado')">Cuadrado</button>
-    </div>
-    <div class="col-3">
-      <button class="btn btn-outline-primary"
-              data-toggle="modal" data-target="#formModal" 
-              (click)="llenarDatos('triángulo')">Triángulo</button>
-    </div>
-    <div class="col-3">
-      <button class="btn btn-outline-primary" 
-              data-toggle="modal" data-target="#formModal" 
-              (click)="llenarDatos('circulo')">Circulo</button>
-    </div>
-    <div class="col-3">
-      <button class="btn btn-outline-primary"
-              data-toggle="modal" data-target="#formModal" 
-              (click)="llenarDatos('rectángulo')">Rectángulo</button>
-    </div>
-  </div>  
+<div class="alert alert-light" role="alert">
+  Selecciona la figura que deseas graficar, luego digíta los datos solicitados para ver el resultado en pantalla
 </div>
+
+<h4>Figura</h4>
+<div class="alert alert-light" role="alert">
+  <div class="container">
+    <div class="row">
+      <div class="col-3">        
+        <a data-toggle="modal" data-target="#formModal" (click)="llenarDatos('cuadrado')">
+          <div [ngClass]="{'active': figura.nombre == 'cuadrado' ? true : false}" class="cuadrado"></div>
+        </a>
+      </div>
+      <div class="col-3">
+        <a data-toggle="modal" data-target="#formModal" (click)="llenarDatos('triángulo')">
+          <div class="triángulo" [ngClass]="{'activeTriangulo': figura.nombre == 'triángulo' ? true : false}" ></div>
+        </a>
+      </div> 
+      <div class="col-3">
+        <a data-toggle="modal" data-target="#formModal" (click)="llenarDatos('circulo')">
+          <div [ngClass]="{'active': figura.nombre == 'circulo' ? true : false}" class="circulo"></div>
+        </a>
+      </div>
+      <div class="col-3">
+        <a data-toggle="modal" data-target="#formModal" (click)="llenarDatos('rectángulo')">
+          <div [ngClass]="{'active': figura.nombre == 'rectángulo' ? true : false}" class="rectángulo"></div>
+        </a>
+      </div>
+    </div>  
+  </div>
+</div>
+
 
 
 <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
@@ -45,13 +53,13 @@
               <div class="col-2">
                 <label class="col-form-label">Alto:</label>
               </div>             
-              <div class="col-4">
+              <div class="col-md-4 col-sm-12">
                 <input type="number" class="form-control" [(ngModel)]="figura.altura" name="altura">  
               </div>
               <div class="col-2">
                 <label class="col-form-label">Ancho:</label>
               </div>
-              <div class="col-4">
+              <div class="col-md-4 col-sm-12">
                 <input type="number" class="form-control" [(ngModel)]="figura.base" name="base">               
               </div>
             </div>
@@ -60,7 +68,7 @@
               <div class="col-2">
                 <label class="col-form-label">Lado:</label>
               </div>             
-              <div class="col-4">
+              <div class="col-md-4 col-sm-12">
                 <input type="number" class="form-control" [(ngModel)]="figura.base" name="base">                
               </div>              
             </div>     
@@ -69,8 +77,14 @@
               <div class="col-2">
                 <label class="col-form-label">Base:</label>
               </div>             
-              <div class="col-4">
+              <div class="col-md-4 col-sm-12">
                 <input type="number" class="form-control" [(ngModel)]="figura.base" name="base">                
+              </div>              
+              <div class="col-2">
+                <label class="col-form-label">Altura:</label>
+              </div>             
+              <div class="col-md-4 col-sm-12">
+                <input type="number" class="form-control" [(ngModel)]="figura.altura" name="altura">                
               </div>              
             </div>           
             <!-- Circulo -->
@@ -78,7 +92,7 @@
               <div class="col-2">
                 <label class="col-form-label">Radio:</label>
               </div>             
-              <div class="col-4">
+              <div class="col-md-4 col-sm-12">
                 <input type="number" class="form-control" [(ngModel)]="figura.base" name="base">                
               </div>              
             </div>
@@ -92,8 +106,16 @@
   </div>
 </div>
 
-<div class="container">
-  <div class="figura" ng-style="{ 'width' : anchoFigura, 'height' : altoFigura }">
-    fgdsgffdg
+<div class="alert alert-light resultado">
+  <div
+      [ngClass]="figura.nombre" class="figura"
+      [style.width] = "figura.nombre != 'triángulo' ? anchoFigura : '0px'"
+      [style.height] = "figura.nombre != 'triángulo' ? altoFigura : '0px'"
+      [style.border-top] = "figura.nombre != 'triángulo' ? '0px solid transparent' : altoFigura + ' solid transparent'" 
+      [style.border-bottom] = "figura.nombre != 'triángulo' ? '0px solid transparent' : altoFigura + ' solid blue'"           
+      [style.border-right] = "figura.nombre != 'triángulo' ? '0px solid transparent' : anchoFigura + ' solid transparent'"
+      [style.border-left] = "figura.nombre != 'triángulo' ? '0px solid transparent' : anchoFigura + ' solid blue'"
+      >
+    
   </div>
 </div>
