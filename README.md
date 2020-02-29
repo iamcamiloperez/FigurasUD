@@ -9,10 +9,15 @@ Clone el repositorio con el comando: git clone https://github.com/iamcamiloperez
 
 ### Pre-requisitos 📋
 
-_Que cosas necesitas para instalar el software y como instalarlas_
+_Software requerido:_
 
 ```
-Da un ejemplo
+* Visual Studio Code
+* Ionic V.4
+* Angular V.8
+* TypeScript V.3.7.2
+* CSS 3
+* HTML 5
 ```
 
 ### Instalación 🔧
@@ -43,14 +48,16 @@ _Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para 
 
 _Menciona las herramientas que utilizaste para crear tu proyecto_
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - El framework web usado
-* [Maven](https://maven.apache.org/) - Manejador de dependencias
-* [ROME](https://rometools.github.io/rome/) - Usado para generar RSS
+* [Ionic](https://ionicframework.com/docs/v4) 
+* [Angular](https://v8.angular.io/docs) 
+* [Type Script](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html) 
+* [CSS](https://www.w3schools.com/css/) 
+* [HTML](https://www.w3schools.com/html/default.asp)
 
 
 ## Autores ✒️
-_Universidad Distrital Francisco José de Caldas_
-_Esp. Ingeniería de Software_
+_Universidad Distrital Francisco José de Caldas._
+_Esp. Ingeniería de Software._
 _Grupo 2_
 
 * **Cristhian Camilo Parez Veloza** - *Código* - 20201099042
