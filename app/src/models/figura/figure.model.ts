@@ -147,8 +147,8 @@ export class CircleModel implements FigureInterface {
   scaleFigure(svgParent?: ElementRef) {
     let dimensions = getDimensions(svgParent);
     if (this.radio > dimensions.maxRadio) {
+      this.scale = this.radio / dimensions.maxRadio;
       this.radio = dimensions.maxRadio;
-      this.scale = this.radio / dimensions.maxRadio
     }
   }
 
@@ -242,8 +242,8 @@ export class SquareModel implements FigureInterface {
   scaleFigure(svgParent?: ElementRef) {
     let dimensions = getDimensions(svgParent);
     if (this.side > dimensions.maxSide) {
-      this.side = dimensions.maxSide;
       this.scale = this.side / dimensions.maxSide;
+      this.side = dimensions.maxSide;
     }
 
     this.x = (dimensions.width - this.side) / 2;
@@ -262,17 +262,36 @@ export class RectModel extends SquareModel {
   public name: string;
 
   constructor(
-    public centerX: string | number,
-    public centerY: string | number,
     public width: number,
     public height: number,
-    public fill: string,
-    public stroke: string,
-    public strokeWidth: number,
+    public x?: string | number,
+    public y?: string | number,
+    public fill?: string,
+    public stroke?: string,
+    public strokeWidth?: number,
   ) {
-    super(width, centerX, centerY, fill, stroke, strokeWidth);
+    super(width, x, y, fill, stroke, strokeWidth);
     this.type = TYPE_SQUARE;
     this.name = 'Rectangulo';
+    this.scale = 1;
+
+    if (!this.fill) {
+      this.fill = DEFAULT_FILL;
+    }
+
+    if (!this.stroke) {
+      this.stroke = DEFAULT_STROKE;
+    }
+
+    if (!this.strokeWidth) {
+      this.strokeWidth = DEFAULT_STROKE_WIDTH;
+    }
+    if (!this.x) {
+      this.x = 0;
+    }
+    if (!this.y) {
+      this.y = 0;
+    }
   }
 
   /**
@@ -294,14 +313,43 @@ export class RectModel extends SquareModel {
    */
   getProperties() {
     return {
-      x: this.centerX,
-      y: this.centerY,
+      x: this.x,
+      y: this.y,
       width: this.width,
       height: this.height,
       fill: this.fill,
       stroke: this.stroke,
       'stroke-width': this.strokeWidth
     };
+  }
+
+  /**
+   * 
+   * @param svgParent 
+   */
+  scaleFigure(svgParent?: ElementRef) {
+    let dimensions = getDimensions(svgParent);
+
+    let diffWidth = Math.abs(dimensions.maxWidth - this.width);
+    let diffHeight = Math.abs(dimensions.maxHeight - this.height);
+
+    console.log('diff', { diffWidth, diffHeight, dimensions, w: this.width, h: this.height });
+
+    if (diffWidth > diffHeight && this.width > dimensions.maxWidth) {
+      this.scale = this.width / dimensions.maxWidth;
+      let initial = this.width;
+      this.width = dimensions.maxWidth;
+      this.height = (this.height * this.width) / initial;
+    } else if (diffHeight > diffWidth && this.height > dimensions.maxHeight) {
+      this.scale = this.height / dimensions.maxHeight;
+      let initial = this.height;
+      this.height = dimensions.maxHeight;
+      this.width = (this.width * this.height) / initial;
+    }
+
+    this.x = (dimensions.width - this.width) / 2;
+    this.y = (dimensions.height - this.height) / 2;
+
   }
 
 }

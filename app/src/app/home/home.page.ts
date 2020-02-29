@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Platform } from '@ionic/angular';
-import { CircleModel, SquareModel } from 'src/models/figura/figure.model';
+import { CircleModel, SquareModel, RectModel } from 'src/models/figura/figure.model';
 import { FigureInterface } from 'src/interfaces/figure.interface';
 
 @Component({
@@ -31,16 +31,18 @@ export class HomePage {
 
     let circleFigure = new CircleModel(20);
     let squareFigure = new SquareModel(20);
+    let rectFigure = new RectModel(3000, 6000);
 
     this.draw(circleFigure, this.circle);
     this.draw(squareFigure, this.square);
-    this.draw(circleFigure, this.triangle);
+    this.draw(rectFigure, this.triangle);
     this.draw(circleFigure, this.rect);
   }
 
   openModal() {
-    let figure = new CircleModel(30);
+    // let figure = new CircleModel(30);
     // let figure = new SquareModel(3000);
+    let figure = new RectModel(300, 600);
     let drawResult = this.draw(figure, this.canvas);
     this.area = drawResult.getArea();
     this.perimeter = drawResult.getPerimeter();
