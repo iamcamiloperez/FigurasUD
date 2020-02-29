@@ -2,9 +2,19 @@
 
 _Figuras UD es un software que permite dibujar figuras geométricas ("Círculo, rectangulo, cuadrado, triangulo"), adicionalmente calcular área y perimetro._
 
+_Requerimientos disponibles en:
+https://iamcamiloperez.github.io/FigurasUD/Documentación/Requerimientos.docx_
+
+_Historia de usuario disponible en:
+https://iamcamiloperez.github.io/FigurasUD/Documentación/HistoriaDeUsuario.docx_
+
+_Diagrama de actividades disponible en: 
+https://iamcamiloperez.github.io/FigurasUD/Documentación/DiagramaDeActividades.png_
+
 _Versión Web disponible en: https://iamcamiloperez.github.io/FigurasUD/compiled/web/index.html_
 
 _Versión Android disponible en: https://github.com/iamcamiloperez/FigurasUD/tree/master/compiled/app_
+
 
 ## Comenzando 🚀
 
