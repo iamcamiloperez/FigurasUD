@@ -1,3 +1,5 @@
+import { ElementRef } from '@angular/core';
+
 /**
  * Representa las propiedades basicas de una figura
  */
@@ -7,10 +9,12 @@ export interface FigureInterface {
     fill?: string;
     stroke?: string;
     strokeWidth?: number;
+    scale?: number;
     getArea(): number;
     getPerimeter(): number;
     getProperties();
-    getSvgElement();
+    getSvgElement(svgParent?: ElementRef);
+    scaleFigure(svgParent?: ElementRef);
 }
 
 /**

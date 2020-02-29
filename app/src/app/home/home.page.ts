@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Platform } from '@ionic/angular';
-import { CircleModel } from 'src/models/figura/figure.model';
+import { CircleModel, SquareModel } from 'src/models/figura/figure.model';
 import { FigureInterface } from 'src/interfaces/figure.interface';
 
 @Component({
@@ -18,7 +18,8 @@ export class HomePage {
 
   public type: string;
   private area: number;
-  private perimetro: number;
+  private perimeter: number;
+  private scale: number;
 
   constructor(platform: Platform) {
     platform.ready().then(() => {
@@ -28,50 +29,22 @@ export class HomePage {
 
   initComponents() {
 
-    let circleDim = this.getDimensions(this.circle);
-    let squareDim = this.getDimensions(this.square);
-    let triangleDim = this.getDimensions(this.triangle);
-    let rectDim = this.getDimensions(this.rect);
-
-    let circleFigure = new CircleModel('calc(50%)', 'calc(50%)', 20/*circleDim.maxRadio*/);
+    let circleFigure = new CircleModel(20);
+    let squareFigure = new SquareModel(20);
 
     this.draw(circleFigure, this.circle);
-    this.draw(circleFigure, this.square);
+    this.draw(squareFigure, this.square);
     this.draw(circleFigure, this.triangle);
     this.draw(circleFigure, this.rect);
   }
 
   openModal() {
-
-    let circleDim = this.getDimensions(this.canvas, 20);
-    let figure = new CircleModel('calc(50%)', 'calc(50%)', circleDim.maxRadio);
-    this.draw(figure, this.canvas);
-
-  }
-
-  /**
-   * Permite obtener las medidas basicas para realizar los calculos a la hora de dibujar la figura
-   * @param element 
-   */
-  getDimensions(element: ElementRef, margin = 0) {
-
-    console.log('clientHeight', element.nativeElement.height.baseVal.value);
-    console.log('clientWidth', element.nativeElement.width);
-    console.log('element', element);
-    let maxHeight = element.nativeElement.clientHeight - (margin * 2);
-    let maxWidth = element.nativeElement.clientWidth - (margin * 2);
-    let maxRadio = (maxHeight < maxWidth ? maxHeight : maxWidth) / 2;
-    let centroX = (maxWidth + (margin * 2)) / 2 || 0;
-    let centroY = (maxHeight + (margin * 2)) / 2 || 0;
-
-    return {
-      maxHeight,
-      maxWidth,
-      maxRadio,
-      centroX,
-      centroY
-    }
-
+    let figure = new CircleModel(30);
+    // let figure = new SquareModel(3000);
+    let drawResult = this.draw(figure, this.canvas);
+    this.area = drawResult.getArea();
+    this.perimeter = drawResult.getPerimeter();
+    this.scale = drawResult.scale;
   }
 
   /**
@@ -91,7 +64,7 @@ export class HomePage {
     if (clearParent) {
       parent.nativeElement.innerHTML = '';
     }
-    parent.nativeElement.appendChild(figure);
+    parent.nativeElement.appendChild(figure.getSvgElement(parent));
     return figure;
   }
 
