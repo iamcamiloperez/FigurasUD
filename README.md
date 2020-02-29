@@ -32,13 +32,11 @@ _Instale Ionic, con el siguiente comando:_
 npm install -g ionic
 ```
 
-_Una vez finalizada la instalación, verifique que la intación sea correcta con el comando: _
+_Una vez finalizada la instalación, verifique que la intación sea correcta con el comando:_
 
 ```
 ionic -v
 ```
-
-_Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
 
 ## Versión 📌
 
