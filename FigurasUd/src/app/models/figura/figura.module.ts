@@ -12,52 +12,49 @@ import { CommonModule } from '@angular/common';
 
 export class FiguraModule {
   
-  nombre:string;
+  name:string;
   base:number;
-  altura:number;
-  diametro:number;
-  hipotenusa:number;
+  height:number;
+  diameter:number;
+  hypotenuse:number;
   area:number;
-  
-  
+    
   constructor() {
     this.base = 0;
-    this.altura = 0;
-    this.nombre = 'rectangulo';
+    this.height = 0;
+    this.name = "Figura";
   }
 
-  calcular(){
-    switch (this.nombre) {
-      case 'cuadrado':
-        this.altura = this.base;
-        this.area = this.base  * this.altura;
-        this.diametro = this.base * 4;
-        break;
-      case 'triángulo':
-        this.area = (this.base  * this.altura) / 2 ;
-        this.hipotenusa = Math.hypot(this.base,this.altura);
-        this.diametro = this.base + this.altura + this.hipotenusa;        
-        break;
-      case 'circulo':
-        this.altura = this.base;
-        this.area = Math.PI * Math.pow(this.base,2);
-        this.diametro = this.base * 2;
-        break;
-      case 'rectángulo':
-        this.area = this.base  * this.altura;
-        this.diametro = (this.base * 2) + (this.altura * 2);
-        break;
 
-      default:
+  calculate(){
+    switch (this.name) {
+      case 'square':
+        this.height = this.base;
+        this.area = this.base  * this.height;
+        this.diameter = this.base * 4;
+        break;
+      case 'triangle':
+        this.area = (this.base  * this.height) / 2 ;
+        this.hypotenuse = Math.hypot(this.base,this.height);
+        this.diameter = this.base + this.height + this.hypotenuse;        
+        break;
+      case 'circle':
+        this.height = this.base;
+        this.area = Math.PI * Math.pow(this.base,2);
+        this.diameter = this.base * 2;
+        break;
+      case 'rectangle':
+        this.area = this.base  * this.height;
+        this.diameter = (this.base * 2) + (this.height * 2);
         break;
     }
   }
 
-  limpiar(){
-    this.nombre = "";
+  clean(){
+    this.name = "";
     this.base = 0;
-    this.altura = 0;
-    this.diametro = 0;
+    this.height = 0;
+    this.diameter = 0;
     this.area = 0;  
   }
 }
