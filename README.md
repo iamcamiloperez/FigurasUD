@@ -1,10 +1,10 @@
 # Figuras UD
 
-Figuras UD es un software que permite dibujar figuras geométricas ("Círculo, rectangulo, cuadrado, triangulo"), adicionalmente calcular área y perimetro.
+_Figuras UD es un software que permite dibujar figuras geométricas ("Círculo, rectangulo, cuadrado, triangulo"), adicionalmente calcular área y perimetro._
 
 ## Comenzando 🚀
 
-Clone el repositorio con el comando: git clone https://github.com/iamcamiloperez/FigurasUD.git
+_Clone el repositorio con el comando: git clone https://github.com/iamcamiloperez/FigurasUD.git _
 
 
 ### Pre-requisitos 📋
@@ -22,18 +22,20 @@ _Software requerido:_
 
 ### Instalación 🔧
 
-_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
+_Para poder ejecutar Ionic se requiere configurar algunos elementos importantes:_
 
-_Dí cómo será ese paso_
+_Descarge e instale Node.js y su gestor de paquetes npm_
 
-```
-Da un ejemplo
-```
-
-_Y repite_
+_Instale Ionic, con el siguiente comando:_
 
 ```
-hasta finalizar
+npm install -g ionic
+```
+
+_Una vez finalizada la instalación, verifique que la intación sea correcta con el comando: _
+
+```
+ionic -v
 ```
 
 _Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
