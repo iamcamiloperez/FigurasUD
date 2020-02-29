@@ -4,7 +4,7 @@ _Figuras UD es un software que permite dibujar figuras geométricas ("Círculo, 
 
 ## Comenzando 🚀
 
-_Clone el repositorio con el comando: git clone https://github.com/iamcamiloperez/FigurasUD.git _
+_Clone el repositorio con el comando: git clone https://github.com/iamcamiloperez/FigurasUD.git_
 
 
 ### Pre-requisitos 📋
