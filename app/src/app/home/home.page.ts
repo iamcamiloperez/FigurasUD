@@ -1,7 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Platform } from '@ionic/angular';
-import { CircleModel, SquareModel, RectModel } from 'src/models/figura/figure.model';
-import { FigureInterface } from 'src/interfaces/figure.interface';
+import { CircleModel, SquareModel, RectModel, TriangleModel } from 'src/models/figura/figure.model';
+import { FigureInterface, TYPE_CIRCLE, TYPE_RECT, TYPE_SQUARE, TYPE_TRIANGLE } from 'src/interfaces/figure.interface';
 
 @Component({
   selector: 'app-home',
@@ -17,11 +17,20 @@ export class HomePage {
   @ViewChild('rect', { read: ElementRef, static: true }) private rect: ElementRef;
 
   public type: string;
-  private area: number;
-  private perimeter: number;
-  private scale: number;
+  public area: number;
+  public perimeter: number;
+  public scale: number;
+  public types;
 
   constructor(platform: Platform) {
+    // this.type = TYPE_CIRCLE;
+    this.scale = 1;
+    this.types = {
+      TYPE_CIRCLE,
+      TYPE_RECT,
+      TYPE_SQUARE,
+      TYPE_TRIANGLE,
+    };
     platform.ready().then(() => {
       this.initComponents();
     });
@@ -29,20 +38,41 @@ export class HomePage {
 
   initComponents() {
 
-    let circleFigure = new CircleModel(20);
-    let squareFigure = new SquareModel(20);
-    let rectFigure = new RectModel(3000, 6000);
 
-    this.draw(circleFigure, this.circle);
-    this.draw(squareFigure, this.square);
-    this.draw(rectFigure, this.triangle);
-    this.draw(circleFigure, this.rect);
+    setTimeout(() => {
+      let circleFigure = new CircleModel(200);
+      let squareFigure = new SquareModel(200);
+      let rectFigure = new RectModel(3000, 6000);
+      let triangleFigure = new TriangleModel(3000, 3000);
+
+      this.draw(circleFigure, this.circle, 2);
+      this.draw(squareFigure, this.square, 2);
+      this.draw(triangleFigure, this.triangle, 2);
+      this.draw(rectFigure, this.rect, 2);
+
+    }, 1000);
+
+
   }
 
   openModal() {
-    // let figure = new CircleModel(30);
-    // let figure = new SquareModel(3000);
-    let figure = new RectModel(300, 600);
+
+    let figure: FigureInterface;
+
+    switch (this.type) {
+      case TYPE_CIRCLE:
+        figure = new CircleModel(2000);
+        break;
+      case TYPE_RECT:
+        figure = new RectModel(3000, 600);
+        break;
+      case TYPE_SQUARE:
+        figure = new SquareModel(3000);
+        break;
+      case TYPE_TRIANGLE:
+        figure = new TriangleModel(600, 600);
+        break;
+    }
     let drawResult = this.draw(figure, this.canvas);
     this.area = drawResult.getArea();
     this.perimeter = drawResult.getPerimeter();
@@ -55,6 +85,7 @@ export class HomePage {
    */
   setType(type: string) {
     this.type = type;
+    this.openModal();
   }
 
   /**
@@ -62,55 +93,12 @@ export class HomePage {
    * @param figure 
    * @param parent 
    */
-  draw(figure: FigureInterface, parent: ElementRef, clearParent = true) {
+  draw(figure: FigureInterface, parent: ElementRef, margin?: number, clearParent = true) {
     if (clearParent) {
       parent.nativeElement.innerHTML = '';
     }
-    parent.nativeElement.appendChild(figure.getSvgElement(parent));
+    parent.nativeElement.appendChild(figure.getSvgElement(parent, margin));
     return figure;
   }
-
-
-  /***********************************************
-  title = 'FigurasUd';
-  figura: FigureModel = new FigureModel();
-  anchoFigura: string = "0px";
-  altoFigura: string = "0px";
-
-
-  llenarDatos(value: string) {
-    this.figura.limpiar();
-    this.figura.nombre = value;
-    this.anchoFigura = "0px";
-    this.altoFigura = "0px";
-  }
-
-  onSubmit(datos: NgForm) {
-    this.figura.altura = datos.value["altura"];
-    this.figura.base = datos.value["base"];
-    this.figura.calcular();
-    this.anchoFigura = this.figura.base + 'px';
-    this.altoFigura = this.figura.altura + 'px';
-
-    if (this.figura.base > 270) {
-      let b = this.figura.base;
-      let h = this.figura.altura;
-      h = (h * 270 / b);
-      b = 270;
-      if (this.figura.nombre == 'triángulo') {
-        h = h / 2;
-        b = b / 2;
-      }
-      this.altoFigura = h.toString() + 'px';
-      this.anchoFigura = b.toString() + 'px';
-      console.log(this.anchoFigura);
-      console.log(this.altoFigura);
-    }
-  }
-  /***********************************************/
-
-
-
-
 
 }

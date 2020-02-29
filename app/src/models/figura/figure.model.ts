@@ -32,9 +32,9 @@ export function setPropertiesSvgElement(properties: any, element) {
  */
 export function getDimensions(element: ElementRef, margin = 10) {
 
-  console.log('clientHeight', element.nativeElement.height.baseVal.value);
-  console.log('clientWidth', element.nativeElement.width);
   console.log('element', element);
+  console.log('clientHeight', element.nativeElement.clientWidth);
+  console.log('clientWidth', element.nativeElement.width);
   let maxHeight = element.nativeElement.clientHeight - (margin * 2);
   let height = element.nativeElement.clientHeight;
   let maxWidth = element.nativeElement.clientWidth - (margin * 2);
@@ -54,8 +54,7 @@ export function getDimensions(element: ElementRef, margin = 10) {
     margin,
     height,
     width
-  }
-
+  };
 }
 
 /**
@@ -122,8 +121,8 @@ export class CircleModel implements FigureInterface {
       cx: this.centerX,
       cy: this.centerY,
       r: this.radio,
-      fill: this.fill,
-      stroke: this.stroke,
+      // fill: this.fill,
+      // stroke: this.stroke,
       'stroke-width': this.strokeWidth
     };
   }
@@ -131,9 +130,9 @@ export class CircleModel implements FigureInterface {
   /**
    * Permite obtener el elemento a dibujar en el SVG
    */
-  getSvgElement(svgParent?: ElementRef) {
+  getSvgElement(svgParent?: ElementRef, margin?: number) {
     if (svgParent) {
-      this.scaleFigure(svgParent);
+      this.scaleFigure(svgParent, margin);
     }
     let figure = document.createElementNS(SVG_NS, TYPE_CIRCLE);
     figure = setPropertiesSvgElement(this.getProperties(), figure);
@@ -144,8 +143,8 @@ export class CircleModel implements FigureInterface {
    * 
    * @param svgParent 
    */
-  scaleFigure(svgParent?: ElementRef) {
-    let dimensions = getDimensions(svgParent);
+  scaleFigure(svgParent?: ElementRef, margin?: number) {
+    let dimensions = getDimensions(svgParent, margin);
     if (this.radio > dimensions.maxRadio) {
       this.scale = this.radio / dimensions.maxRadio;
       this.radio = dimensions.maxRadio;
@@ -217,8 +216,8 @@ export class SquareModel implements FigureInterface {
       y: this.y,
       width: this.side,
       height: this.side,
-      fill: this.fill,
-      stroke: this.stroke,
+      // fill: this.fill,
+      // stroke: this.stroke,
       'stroke-width': this.strokeWidth
     };
   }
@@ -226,9 +225,9 @@ export class SquareModel implements FigureInterface {
   /**
    * Permite obtener el elemento a dibujar en el SVG
    */
-  getSvgElement(svgParent?: ElementRef) {
+  getSvgElement(svgParent?: ElementRef, margin?: number) {
     if (svgParent) {
-      this.scaleFigure(svgParent);
+      this.scaleFigure(svgParent, margin);
     }
     let figure = document.createElementNS(SVG_NS, TYPE_RECT);
     figure = setPropertiesSvgElement(this.getProperties(), figure);
@@ -239,8 +238,8 @@ export class SquareModel implements FigureInterface {
    * 
    * @param svgParent 
    */
-  scaleFigure(svgParent?: ElementRef) {
-    let dimensions = getDimensions(svgParent);
+  scaleFigure(svgParent?: ElementRef, margin?: number) {
+    let dimensions = getDimensions(svgParent, margin);
     if (this.side > dimensions.maxSide) {
       this.scale = this.side / dimensions.maxSide;
       this.side = dimensions.maxSide;
@@ -317,8 +316,8 @@ export class RectModel extends SquareModel {
       y: this.y,
       width: this.width,
       height: this.height,
-      fill: this.fill,
-      stroke: this.stroke,
+      // fill: this.fill,
+      // stroke: this.stroke,
       'stroke-width': this.strokeWidth
     };
   }
@@ -327,8 +326,8 @@ export class RectModel extends SquareModel {
    * 
    * @param svgParent 
    */
-  scaleFigure(svgParent?: ElementRef) {
-    let dimensions = getDimensions(svgParent);
+  scaleFigure(svgParent?: ElementRef, margin?: number) {
+    let dimensions = getDimensions(svgParent, margin);
 
     let diffWidth = Math.abs(dimensions.maxWidth - this.width);
     let diffHeight = Math.abs(dimensions.maxHeight - this.height);
@@ -361,18 +360,36 @@ export class TriangleModel implements FigureInterface {
 
   public type: string;
   public name: string;
-  public centerX: string | number;
-  public centerY: string | number;
+  public scale: number;
 
   constructor(
     public width: number,
     public height: number,
-    public fill: string,
-    public stroke: string,
-    public strokeWidth: number,
+    public x?: number,
+    public y?: number,
+    public fill?: string,
+    public stroke?: string,
+    public strokeWidth?: number,
   ) {
     this.type = TYPE_TRIANGLE;
     this.name = 'Triangulo';
+    if (!this.fill) {
+      this.fill = DEFAULT_FILL;
+    }
+
+    if (!this.stroke) {
+      this.stroke = DEFAULT_STROKE;
+    }
+
+    if (!this.strokeWidth) {
+      this.strokeWidth = DEFAULT_STROKE_WIDTH;
+    }
+    if (!this.x) {
+      this.x = 0;
+    }
+    if (!this.y) {
+      this.y = 0;
+    }
   }
 
   /**
@@ -393,10 +410,11 @@ export class TriangleModel implements FigureInterface {
    * Permite obtener las propiedades del elemento a dibujar
    */
   getProperties() {
+
     return {
-      points: "100,10 190,190 10,190",
-      fill: this.fill,
-      stroke: this.stroke,
+      points: `${this.x},${this.y} ${this.x},${this.height} ${this.width + this.x},${this.height + this.y}`,
+      // fill: this.fill,
+      // stroke: this.stroke,
       'stroke-width': this.strokeWidth
     };
   }
@@ -404,17 +422,42 @@ export class TriangleModel implements FigureInterface {
   /**
    * Permite obtener el elemento a dibujar en el SVG
    */
-  getSvgElement(svgParent?: ElementRef) {
+  getSvgElement(svgParent?: ElementRef, margin?: number) {
+    if (svgParent) {
+      this.scaleFigure(svgParent, margin);
+    }
     let figure = document.createElementNS(SVG_NS, TYPE_TRIANGLE);
     figure = setPropertiesSvgElement(this.getProperties(), figure);
     return figure;
   }
 
   /**
-   * 
-   * @param svgParent 
-   */
-  scaleFigure(svgParent?: ElementRef) {
+  * 
+  * @param svgParent 
+  */
+  scaleFigure(svgParent?: ElementRef, margin?: number) {
+    let dimensions = getDimensions(svgParent, margin);
+
+    let diffWidth = Math.abs(dimensions.maxWidth - this.width);
+    let diffHeight = Math.abs(dimensions.maxHeight - this.height);
+
+    console.log('diff', { diffWidth, diffHeight, dimensions, w: this.width, h: this.height });
+
+    if (diffWidth > diffHeight && this.width > dimensions.maxWidth) {
+      this.scale = this.width / dimensions.maxWidth;
+      let initial = this.width;
+      this.width = dimensions.maxWidth;
+      this.height = (this.height * this.width) / initial;
+    } else if (diffHeight > diffWidth && this.height > dimensions.maxHeight) {
+      this.scale = this.height / dimensions.maxHeight;
+      let initial = this.height;
+      this.height = dimensions.maxHeight;
+      this.width = (this.width * this.height) / initial;
+    }
+
+    this.x = (dimensions.width - this.width) / 2;
+    this.y = (dimensions.height - this.height) / 2;
+
   }
 
 }

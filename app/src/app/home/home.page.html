@@ -28,30 +28,25 @@
     <h4>Figura</h4>
 
     <ion-card>
-      <ion-card-content class="figuras">
-
-        <div (click)="setType(TYPE_CIRCLE)">
-          <svg #circle class="figura circulo"></svg>
+      <ion-card-content class="figures">
+        <div (click)="setType(types.TYPE_CIRCLE)">
+          <svg #circle class="figure circle" [ngClass]="{'active': type === types.TYPE_CIRCLE}" id="circle"></svg>
           <h6>Circulo</h6>
         </div>
-        <div (click)="setType(TYPE_SQUARE)">
-          <svg #square class="figura cuadrado"></svg>
+        <div (click)="setType(types.TYPE_SQUARE)">
+          <svg #square class="figure square" [ngClass]="{'active': type === types.TYPE_SQUARE}"></svg>
           <h6>Cuadrado</h6>
         </div>
-        <div (click)="setType(TYPE_TRIANGLE)">
-          <svg #triangle class="figura triangulo"></svg>
+        <div (click)="setType(types.TYPE_TRIANGLE)">
+          <svg #triangle class="figure triangle" [ngClass]="{'active': type === types.TYPE_TRIANGLE}"></svg>
           <h6>Triangulo</h6>
         </div>
-        <div (click)="setType(TYPE_RECT)">
-          <svg #rect class="figura rectangulo"></svg>
+        <div (click)="setType(types.TYPE_RECT)">
+          <svg #rect class="figure rect" [ngClass]="{'active': type === types.TYPE_RECT}"></svg>
           <h6>Rectangulo</h6>
         </div>
       </ion-card-content>
     </ion-card>
-
-    <ion-button expand="block" color="primary" (click)="openModal()">
-      Dibujar
-    </ion-button>
 
     <ion-card class="card-canvas">
       <ion-card-content>

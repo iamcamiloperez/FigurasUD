@@ -13,8 +13,8 @@ export interface FigureInterface {
     getArea(): number;
     getPerimeter(): number;
     getProperties();
-    getSvgElement(svgParent?: ElementRef);
-    scaleFigure(svgParent?: ElementRef);
+    getSvgElement(svgParent?: ElementRef, margin?: number);
+    scaleFigure(svgParent?: ElementRef, margin?: number);
 }
 
 /**
@@ -22,13 +22,13 @@ export interface FigureInterface {
  */
 export const TYPE_CIRCLE = 'circle';
 export const TYPE_SQUARE = 'square';
-export const TYPE_TRIANGLE = 'triangle';
+export const TYPE_TRIANGLE = 'polygon';
 export const TYPE_RECT = 'rect';
 
 /**
  * Valores por defecto
  */
 export const SVG_NS = "http://www.w3.org/2000/svg";
-export const DEFAULT_FILL = "red";
-export const DEFAULT_STROKE = "blue";
-export const DEFAULT_STROKE_WIDTH = 2;
+export const DEFAULT_FILL = "#d7d8da";
+export const DEFAULT_STROKE = "#d7d8da";
+export const DEFAULT_STROKE_WIDTH = 1;
